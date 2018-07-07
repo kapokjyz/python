@@ -54,6 +54,3 @@ T = FindMixAndMax([1, 0, 2, 6, 10])
 print(T)
 T = FindMixAndMax([])
 print(T)
-
-
-
