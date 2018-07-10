@@ -102,8 +102,55 @@ person('tony', 28, **extra)
 # **extra表示把extra这个dict的所有key-value用关键字参数传入到哈数的**kw参数，kw将获得一个dict，注意kw获得的dict是extra的一份拷贝，对kw的改动不会影响到函数外的extra
 
 # 命名关键字参数
+# 对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数，至于到底传入了哪些，就需要在函数内部通过kw检查。
+def person1(name, age, **kw):
+    if 'city' in kw:
+        # 有city参数
+        pass
+    if 'job' in kw:
+        # 有job参数
+        pass
+    print('name:', name, 'age:', age, 'other:', kw)
+# 如果需要限制关键字参数的名字， 就可以用命名关键字参数，例如，只接收city和job作为关键字参数，这种方式定义的函数如下：
+def person2(name, age, *, city, job):
+    print(name, age, city, job)
+print('person2')
+person2('zhili', 18, city = 'jiangxi', job = 'engineer')
 
+# 如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符 * 了：
+def person3(name, age, *args, city, job):
+    print(name, age, args, city, job)
 
+# 命名关键字参数必须传入参数名，这和位置参数不同，如果没有传入参数名，调用将报错。
+print('person3')
+person3('zj', 19, 1, 2, 3, city = 'jiangnan', job = 'engineer')
 
+# 命名关键字参数可以有缺省值，从而简化调用：
+def person4(name, age, *, city = 'jiangxi', job):
+    print(name, age, city, job)
+print('person4')
+person4('zengjian', 100, job='teacher')
 
+# 使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个 * 作为特殊分隔符，如果缺少 * ，python解释器将无法识别位置参数和命名关键字参数，例如：
+def person5(name, age, city, job):
+    # 缺少 * ，city 和 job 被视为位置参数
+    pass
 
+# 参数组合：
+# 在python中定义函数，可以使用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用，但是值得注意的是，参数定义的顺序必须是：
+# 必选参数、默认参数、可变参数、命名关键字参数和关键字参数
+def f1(a, b, c=0, *args, d, **kw):
+    print('a = ', a, 'b = ', b, 'c = ', c, 'args = ', args, 'd = ', d, 'kw = ', kw)
+# 在函数调用的时候，python解释器自动按照参数位置和参数名把对应的参数传进去
+print('f1')
+f1(1, 2, 3, 4, 5, 6, d=7, e=8, f=9, g=10)
+
+# 练习：函数接收多个数并计算乘积
+def product(*nums):
+    sum = 1
+    for n in nums:
+        sum = sum * n
+    return sum
+print(product(5,6))
+print(product(5,6,7))
+print(product())
