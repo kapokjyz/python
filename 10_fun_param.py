@@ -147,10 +147,13 @@ f1(1, 2, 3, 4, 5, 6, d=7, e=8, f=9, g=10)
 
 # 练习：函数接收多个数并计算乘积
 def product(*nums):
-    sum = 1
-    for n in nums:
-        sum = sum * n
-    return sum
+    if nums:        
+        sum = 1
+        for n in nums:
+            sum = sum * n
+        return sum
+    else:
+        return None
 print(product(5,6))
 print(product(5,6,7))
 print(product())
