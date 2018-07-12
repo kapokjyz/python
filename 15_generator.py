@@ -58,8 +58,10 @@ while True:
         break
 
 # 练习：输出杨辉三角
+
+# 方法一：
 def triangles(lines):
-    n, m, a, b = 0, 0, 0, 1
+    n = 0
     L = [1]
     while n < lines:
         yield L
@@ -67,4 +69,26 @@ def triangles(lines):
         n = n + 1
 g = triangles(5)
 for n in g:
-    print(n)        
+    print(n)    
+
+# 方法二：
+def triangles_1(lines):
+    a = [1]
+    m = 0
+    while m < lines:
+        yield a
+        b = [1]
+        for n in range(len(a)):
+            if n == 0:
+                continue
+            b.append(a[n-1] + a[n])
+        b.append(1)
+        a = b
+        m = m + 1
+g1 = triangles_1(5)
+for n in g1:
+    print(n)
+
+print(list(range(5)))
+print(list(range(1)))
+
