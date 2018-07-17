@@ -27,3 +27,49 @@ def char2num(s):
     return digits[s]
 r = reduce(fn, map(char2num, '13579'))
 print(r)
+
+# 整理成一个str2int 的函数就是：
+DIGITS = {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9}
+def str2int(s):
+    def fn_1(x, y):
+        return x * 10 + y
+    def char2num_1(s):
+        return DIGITS[s]
+    return reduce(fn_1, map(char2num_1, s))
+
+print(str2int('123456'))
+# 还可以用 lambda 函数进一步优化：
+def char2num_2(s):
+    return DIGITS[s]
+def str2int_1(s):
+    return reduce(lambda x, y: x * 10 + y, map(char2num_2, s))
+print(str2int_1('6879'))
+
+# 练习 1 ：把不规范的英文名字，变为首字母大写，其他小写的规范名字
+def normalize(name):
+    str = name
+    return str.capitalize()
+L1 = ['adam', 'LISA', 'barI']
+L2 = list(map(normalize, L1))
+print(L2)
+
+# 练习2 ：编写一个prod() 函数，可以接收一个list 并利用reduce()求积：
+def prod(L):
+    def pr(x, y):
+        return x * y
+    return reduce(pr, L)
+r = prod([1,2,3,4])
+print(r)
+
+# 练习 3：利用 map 和 reduce 编写一个str2float 函数，把字符串'123.456' 转换成浮点数 123.456：
+# def str2float(s):
+#     i = s.find('.')
+#     def fn_2(x, y):
+#         return x * 10 + y
+#     def char2num_2(s):
+#         return DIGITS[s]
+#     return reduce(fn_2, map(char2num_2, s)) / (10*i)
+# r1 = str2float('123.456')
+# print(r1)
+# r2 = str2float('123.456789')
+# print(r2)
