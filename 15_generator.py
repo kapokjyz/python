@@ -92,3 +92,6 @@ for n in g1:
 print(list(range(5)))
 print(list(range(1)))
 
+L = [1, 2,3,4]
+L = [5] + L
+print(L)

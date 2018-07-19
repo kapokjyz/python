@@ -62,14 +62,22 @@ r = prod([1,2,3,4])
 print(r)
 
 # 练习 3：利用 map 和 reduce 编写一个str2float 函数，把字符串'123.456' 转换成浮点数 123.456：
-# def str2float(s):
-#     i = s.find('.')
-#     def fn_2(x, y):
-#         return x * 10 + y
-#     def char2num_2(s):
-#         return DIGITS[s]
-#     return reduce(fn_2, map(char2num_2, s)) / (10*i)
-# r1 = str2float('123.456')
-# print(r1)
-# r2 = str2float('123.456789')
-# print(r2)
+def str2float(s):
+    # find()返回查找的字符串的位置值
+    i = s.find('.')
+    g = (x for x in s if x != '.')
+    def fn_2(x, y):
+        return x * 10 + y
+    def char2num_2(s):
+        return DIGITS[s]
+    r =reduce(fn_2, map(char2num_2, g))
+    print(r)
+    n = 1
+    for j in range(len(s) - i - 1):
+        n = n * 10
+    return r/n
+r1 = str2float('123.456')
+print(r1)
+r2 = str2float('123.456789')
+print(r2)
+
