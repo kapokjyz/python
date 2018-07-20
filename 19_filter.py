@@ -28,3 +28,26 @@ it1 = primes()
 n = 1
 for n in range(10):
     print(next(it1))
+
+# 练习：回数，指的是从左向右读和从右向左读都是一样的数，例如12321,909，利用filter() 筛选出回数：
+def is_palindrome(n):
+    s = str(n)
+    for i in range(len(s)):
+        if s[i] != s[-i-1]:
+            return False        
+    return True
+        
+output = filter(is_palindrome, range(1, 200))
+print(list(output))
+
+# 利用切片的方法：
+def is_palindrome_1(n):
+    s = str(n)
+    return s[:] == s[::-1] # [::-1] 这种切片操作表示取整个列表，并倒序显示
+output = filter(is_palindrome_1, range(1, 300))
+print(list(output))
+
+
+
+
+
