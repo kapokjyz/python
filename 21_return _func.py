@@ -14,10 +14,10 @@ def lazy_sum(*args):
         return ax
     return sum
 L = [1,3,5,7,9]
-f = lazy_sum(*L)
+f1 = lazy_sum(*L)
 L.append(11)
 print(L)
-print(f())
+print(f1())
 
 #  内部函数可以引用外部函数的参数和局部变量，这种称为闭包，这种程序结构具有极大的威力
 
@@ -30,8 +30,8 @@ def count():
             return i * i
         fs.append(f)
     return fs
-f1, f2, f3 = count()
-print(f1()) # 输出9
+f7, f2, f3 = count()
+print(f7()) # 输出9
 print(f2()) # 输出9
 print(f3()) # 输出9
 # 上面全部输出9的原因在于，返回的函数并没有立即执行，而是等到3个函数都返回时，它们所引用的变量i,都已经改变成3了，因此最终结果为9
@@ -39,9 +39,9 @@ print(f3()) # 输出9
 # 返回闭包时，牢记一点，返回函数不要引用任何循环变量，或者后续会发生改变的变量。
 
 def count_1():
-    def f():
+    def f(j):
         def g():
-            return i * i
+            return j * j
         return g
     fs = []
     for i in range(1, 4):
